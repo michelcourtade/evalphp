@@ -1,5 +1,5 @@
-vendor/*
-composer.phar
-.buildpath
-.project
-.settings/*
+/vendor/
+/composer.phar
+/.buildpath
+/.project
+/.settings/
