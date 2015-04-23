@@ -1,0 +1,19 @@
+{
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.php.net"
+        }
+
+    ],
+    "require": {
+        "pear/auth": "*",
+        "pear-pear.php.net/MDB2": "*",
+        "pear-pear.php.net/MDB2_Driver_mysql": ">=1.4.1.0",
+        "pear-pear.php.net/Translation2": "*",
+        "pear-pear.php.net/DB_DataObject": "*",
+        "pear-pear.php.net/Pager": "*",
+        "pear-pear.php.net/Cache_Lite": "*",
+        "twig/twig": "~1.0"
+    }
+} 
