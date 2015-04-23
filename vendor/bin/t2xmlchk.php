@@ -1,1 +1,0 @@
-../pear-pear.php.net/Translation2/bin/t2xmlchk.php
