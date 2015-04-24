@@ -99,13 +99,15 @@ $params = array(
     'lang_name_col'   => 'name',
     'lang_meta_col'   => 'meta',
     'lang_errmsg_col' => 'error_text',
-    'strings_default_table' => TABLE_PREFIX.TABLE_MESSAGES, 
+    'strings_default_table' => TABLE_PREFIX.TABLE_MESSAGES,
     'string_id_col'         => 'id',
-    'string_page_id_col'    => 'mbc_site',
+    //'string_page_id_col'    => 'mbc_site',
     'string_text_col'       => '%s',
 	'cacheOptions'			=> array('cacheDir' => ROOT_PATH_CACHE, 'lifeTime' => 3600*24)
 );
 $a = new Auth("MDB2", $AuthOptions, "Tools::loginFunction");
+// gestion des traductions
+//$tr = Tools::initTranslation($driver, $dbinfo, $params, $lang);
 
 if($a->checkAuth()) {
     $user = User::getUserById($a->getAuthData('user_id'));

@@ -6,7 +6,7 @@ class Tools {
 	    $tr =& Translation2::factory($driver, $dbinfo, $params);
 	    if(!PEAR::isError($tr)) {
 	        $tr->setLang($langue);
-	        $tr->setPageId(MBC_SITE);
+	        $tr->setPageId(1);
 
 	        $tr =& $tr->getDecorator('CacheLiteFunction');
 	        $tr->setOption('caching', true);
@@ -28,9 +28,9 @@ class Tools {
     }
 
 		static public function removeQuotes($string) {
-			return str_replace("'","",$string);		
+			return str_replace("'","",$string);
 		}
-		
+
 		/**
 		 * Convert \n to <br />
 		 *
@@ -53,7 +53,7 @@ class Tools {
 				header('Location: '.$baseUri."/".$url);
 			exit();
 		}
-		
+
 		/**
 		* Get a value from $_POST / $_GET
 		* if unavailable, take a default value
@@ -66,34 +66,34 @@ class Tools {
 		 	if (!isset($key) OR empty($key) OR !is_string($key))
 				return false;
 			$ret = (isset($_POST[$key]) ? $_POST[$key] : (isset($_GET[$key]) ? $_GET[$key] : $defaultValue));
-	
+
 			if (is_string($ret) === true)
 				$ret = urldecode(preg_replace('/((\%5C0+)|(\%00+))/i', '', urlencode($ret)));
 			return !is_string($ret)? $ret : stripslashes($ret);
 		}
-	
+
 		static public function getIsset($key) {
 		 	if (!isset($key) OR empty($key) OR !is_string($key))
 				return false;
 		 	return isset($_POST[$key]) ? true : (isset($_GET[$key]) ? true : false);
 		}
-		
+
 		static public function truncate($string, $max_length = 100, $replacement = '...', $trunc_at_space = false)
 		{
 			$replacement = "...";
-			
+
 			$max_length -= strlen($replacement);
 			$string_length = strlen($string);
-		
+
 			if($string_length <= $max_length)
 				return $string;
-		
+
 			if( $trunc_at_space && ($space_position = strrpos($string, ' ', $max_length-$string_length)) )
 				$max_length = $space_position;
-		
+
 			return substr_replace($string, $replacement, $max_length);
 		}
-		
+
 		static public function isValidEmail($email) {
 		global $tr, $errors;
 		$goodemail = (preg_match( '/^[A-Z0-9._-]+@[A-Z0-9][A-Z0-9.-]{0,61}[A-Z0-9]\.[A-Z.]{2,6}$/i', $email));
@@ -103,38 +103,38 @@ class Tools {
 		}
 		return true;
 		}
-		
+
 		static public function setSessionParameter($parameterName, $parameterValue) {
 			$_SESSION[$parameterName] = $parameterValue;
 		}
-		
+
 		static public function getSessionParameter($parameterName) {
 			return $_SESSION[$parameterName];
 		}
-	
+
 		static public function encodeAccents($str) {
 			return htmlspecialchars_decode(htmlentities($str));
 		}
-		
-		
-		
+
+
+
 		static public function getIp() {
-			if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){ 
+			if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
 				$ip = end(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
-			} 
-			elseif(isset($_SERVER['HTTP_CLIENT_IP'])){ 
+			}
+			elseif(isset($_SERVER['HTTP_CLIENT_IP'])){
 			   $ip = $_SERVER['HTTP_CLIENT_IP'];
-			} 
-			else{ 
+			}
+			else{
 				$ip = $_SERVER['REMOTE_ADDR'];
-			} 
-			
+			}
+
 			return $ip;
 		}
-		
-		
-	
-	
+
+
+
+
 	static public function sendEmail($from, $recipient, $subject, $message_txt, $message_html, $valid = 1) {
 		global $tr, $langue;
 		/**
@@ -150,10 +150,10 @@ class Tools {
 		 * $transport = Swift_MailTransport::newInstance();
 		 **/
 		$transport = Swift_SmtpTransport::newInstance(MAILHOST, 25);
-	
+
 		//Create the Mailer using your created Transport
 		$mailer = Swift_Mailer::newInstance($transport);
-	
+
 		//Create a message
 		$message = Swift_Message::newInstance()
 		->setCharset('iso-8859-1')
@@ -164,7 +164,7 @@ class Tools {
 		->setBody($message_html, 'text/html')
 		->addPart($message_txt, 'text/plain')
 		;
-	
+
 		//Send the message
 		$result = $mailer->send($message);
 	}
