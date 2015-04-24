@@ -22,7 +22,8 @@ Les produits sont structurés de la manière suivante :
 * texte
 * prix
 * actif
-Vous aurez à créer cette table dans la BDD.
+
+Vous aurez à créer cette table dans la BDD (en la nommant products).
 
 Les tables suivantes sont déjà créées et vous permettront de créer les classes DB_DataObject associées :
 * categories pour la classe Category
